@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="rootPanel" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dmedia.view.PanelView">
+   <children>
+      <VBox fx:id="frontPanel" alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" pickOnBounds="false" prefHeight="55.0" stylesheets="@style.css">
+         <children>
+            <Slider fx:id="durationSlider" />
+            <HBox alignment="CENTER" prefHeight="40.0" spacing="15.0">
+               <children>
+                  <Button fx:id="openfileButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="playButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" />
+                  <Button fx:id="stopButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="soundModeImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <FlowPane.margin>
+                              <Insets right="5.0" />
+                           </FlowPane.margin>
+                        </ImageView>
+                        <Slider fx:id="volumeSlider" />
+                     </children>
+                  </FlowPane>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0">
+                     <children>
+                        <ImageView fx:id="choiceSpeedImage" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" />
+                        <ChoiceBox fx:id="choiceSpeed" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="32.0" />
+                     </children>
+                  </StackPane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
