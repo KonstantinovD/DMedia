@@ -42,7 +42,6 @@ public class Main extends Application {
 
         ApplicationBuilder applicationBuilder = new ApplicationBuilder();
         Scene scene = applicationBuilder.buildAppScene(mStage);
-        applicationBuilder.setupStageProperities(mStage);
 
         //mStage
 

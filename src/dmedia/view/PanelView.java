@@ -1,6 +1,5 @@
 package dmedia.view;
 
-import dmedia.controller.Controller;
 import dmedia.model.media.MediaState;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -23,8 +22,6 @@ public class PanelView {
      * @param mp
      */
     public void initNewMedia(MediaPlayer mp){
-        //durationSlider.setMax(mp.getMedia().getDuration().toSeconds());
-        //volumeSlider.setMax(mp.getVolume());
         bindVolumeSliderToPlayer(mp);
         bindVideoSliderToPlayer(mp);
     }
@@ -39,6 +36,9 @@ public class PanelView {
         model.getVolumeProperty().addListener((observable, oldValue, newValue) -> {
             setVolume(newValue.doubleValue());
         });
+        //sets initial volume
+        setVolume(model.getVolumeProperty().get());
+
         model.getIsPlayedProperty().addListener((observable, oldValue, newValue) -> {
             setPlayed(newValue);
         });
@@ -50,15 +50,11 @@ public class PanelView {
         });
     }
 
-    private Controller mController;
-    /**
-     * Sets controller for current view
-     * @param controller
-     */
-    public void setController(Controller controller){
-        mController = controller;
-    }
 
+    /**
+     * sets panel visible or not (after some time panel disappears in order not hide a lower part of video)
+     * @param isVisible
+     */
     public void setVisible(boolean isVisible){
         frontPanel.setVisible(isVisible);
     }
@@ -142,13 +138,13 @@ public class PanelView {
         choiceSpeedImage.setImage(imageChoiceSpeed);
         soundModeImage.setImage(imageSoundOn);
 
+        durationSlider.setFocusTraversable(false);
+        volumeSlider.setFocusTraversable(false);
+
         initChoiceSpeed();
         initSliders();
-        if(mController != null) {
-            mController.informControllerAboutLoading();
-        }
     }
-    public boolean isInitialized(){ return mIsInitialized; }
+
 
 
     private void initChoiceSpeed(){

@@ -13,13 +13,13 @@ import dmedia.Main;
 
 public class RootView {
 
-    private Stage mMainStage;
-
     @FXML
     private MediaView mediaView;
 
     @FXML
     private StackPane stackPane;
+
+    public StackPane getStackPane() { return stackPane; }
 
     public MediaView getMediaView(){
         return mediaView;
@@ -44,6 +44,11 @@ public class RootView {
     public void generateAlert(Alert.AlertType type, String content){
         ApplicationAlert alert = new ApplicationAlert(type, content);
         alert.showAndWait();
+    }
+
+    @FXML
+    public void initialize() {
+        stackPane.setFocusTraversable(true);
     }
 
 }

@@ -103,6 +103,12 @@ public class MediaState {
                     mPanelView.initNewMedia(mediaPlayer);
                     playMedia(true);
                 });
+                //process end of video
+                mediaPlayer.setOnEndOfMedia(() -> {
+                    playMedia(false);
+                    setDuration(0.0);
+                });
+
                 mRootView.getMediaView().setMediaPlayer(mediaPlayer);
 
                 //bind
@@ -245,9 +251,11 @@ public class MediaState {
         mRootView = rootView;
     }
 
+
+    public static final double INITIAL_VOLUME = 0.2;
     private void initProperities(){
         mDuration = new SimpleDoubleProperty(0.0);
-        mVolume = new SimpleDoubleProperty(0.0);
+        mVolume = new SimpleDoubleProperty(INITIAL_VOLUME);
         mRate = new SimpleDoubleProperty(1.0);
         mIsPlayed = new SimpleBooleanProperty(false);
         mIsLoaded = new SimpleBooleanProperty(false);

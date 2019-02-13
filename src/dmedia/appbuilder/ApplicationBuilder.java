@@ -2,6 +2,7 @@ package dmedia.appbuilder;
 
 import dmedia.Main;
 import dmedia.controller.PanelController;
+import dmedia.controller.RootController;
 import dmedia.model.media.MediaState;
 import dmedia.view.PanelView;
 import dmedia.view.RootView;
@@ -21,6 +22,7 @@ public class ApplicationBuilder {
     private PanelView mPanelView;
 
     private PanelController mPanelController;
+    private RootController mRootController;
 
     private MediaState mModel;
 
@@ -40,19 +42,17 @@ public class ApplicationBuilder {
 
         mModel = new MediaState();
         mPanelController = new PanelController();
+        mRootController = new RootController();
+
+        //build view
         loadFXML();
         constructView();
 
         Scene scene = new Scene(mRoot);
-        initListeners(scene);
 
-        buildMVC();
+        buildMVC(stage);
 
         return scene;
-    }
-
-    public void setupStageProperities(Stage stage){
-        mStage.setTitle("DMedia");
     }
 
     /**
@@ -67,8 +67,8 @@ public class ApplicationBuilder {
         rootLayoutLoader.setLocation(ApplicationBuilder.class.getResource("..\\view\\RootLayout.fxml"));
         panelLoader.setLocation(ApplicationBuilder.class.getResource("..\\view\\Panel.fxml"));
 
-        mRoot = (AnchorPane) rootLayoutLoader.load();
-        mPanel = (VBox) panelLoader.load();
+        mRoot = rootLayoutLoader.load();
+        mPanel = panelLoader.load();
 
         mRootView = rootLayoutLoader.getController();
         mPanelView = panelLoader.getController();
@@ -86,31 +86,23 @@ public class ApplicationBuilder {
         AnchorPane.setRightAnchor(mPanel, 0.0);
     }
 
-    private void initListeners(Scene scene) {
-
-        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent doubleClick) {
-                if (doubleClick.getClickCount() == 2) {//make app fullscreen
-                    mPanelView.setVisible(false);
-                    mStage.setFullScreen(true);
-                }
-            }
-        });
-    }
-
     /**
      * Connects model, view and controller
      */
-    private void buildMVC(){
+    private void buildMVC(Stage stage){
         mModel.setPanelView(mPanelView);
         mModel.setRootView(mRootView);
 
-        mPanelView.setController(mPanelController);
         mPanelView.setModel(mModel);
 
         mPanelController.setModel(mModel);
         mPanelController.setPanelView(mPanelView);
+
+        mRootController.setRootView(mRootView);
+        mRootController.setPanelView(mPanelView);
+        mRootController.setStage(stage);
+        mRootController.initListeners();
+        mRootController.setMediaModel(mModel);
     }
 
     private void setCSS(){

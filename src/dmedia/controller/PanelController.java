@@ -12,12 +12,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-public class PanelController implements Controller{
+public class PanelController{
 
-    @Override
-    public void informControllerAboutLoading() {
-        initListeners();
-    }
 
     private PanelView mPanelView;
 
@@ -32,10 +28,7 @@ public class PanelController implements Controller{
 
     public void setPanelView(PanelView panelView){
         mPanelView = panelView;
-        if(mPanelView.isInitialized()){
-            //if model is initialised, it will not call informControllerAboutLoading() method
-            initListeners();
-        }
+        initListeners();
     }
 
     public void setModel(MediaState model){
